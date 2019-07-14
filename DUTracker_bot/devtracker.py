@@ -26,7 +26,7 @@ def mainloop(source, target, latest_comment_utc):
 			print(comment.body)
 			print(comment.permalink)
 			print(comment.created_utc)
-			target.submit(comment.submission.title+" ["+comment.author.name+"]", url="https://www.reddit.com"+comment.permalink)
+			target.submit(comment.submission.title+" ["+comment.author.name+"]", url="https://www.reddit.com"+comment.permalink+"?context=1")
 
 	return str(tmpTime)
 
