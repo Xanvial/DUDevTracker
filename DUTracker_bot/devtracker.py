@@ -2,6 +2,7 @@ import praw
 import os
 import psycopg2
 import time
+import usernames from userlist
 
 def bot_login():
 	# Create the Reddit instance and log in
@@ -12,19 +13,13 @@ def bot_login():
 						 user_agent = "Xanvial")
 	return reddit
 
-userlist = [
-	"NathanKell",
-	"IceX",
-	"JonP_valve"
-	]
-
 def mainloop(source, target, latest_comment_utc):
 	TimeLastCheckComment=float(latest_comment_utc)
 	tmpTime = 0
 	for comment in source.comments(limit=1000):
 		if (tmpTime == 0):
 			tmpTime = comment.created_utc   # save the latest comment time
-		if(comment.created_utc > TimeLastCheckComment and comment.author.name in userlist):
+		if(comment.created_utc > TimeLastCheckComment and comment.author.name in userlist.usernames):
 			print("-- Found --")
 			print(comment.submission.title)
 			print(comment.comment.author.name)
@@ -48,6 +43,10 @@ if __name__ == "__main__":
 				latest_utc = str(latest_utc[0][0])
 			else:
 				latest_utc = "0"
+			 
+			print("Dev List:")
+			for u in userlist.usernames:
+				print("  "+u)
 				
 			print ("\nFetching comments..")
 			r = bot_login()
@@ -55,6 +54,7 @@ if __name__ == "__main__":
 			
 			ULreddit = r.subreddit("underlords")
 			TrackerReddit = r.subreddit("UnderlordsDevTracker")
+			
 			while True:
 				# Fetching all new comments that were created after latest_utc time
 				print ("\nstart utc from db:"+latest_utc)
