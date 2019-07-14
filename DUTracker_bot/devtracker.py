@@ -55,7 +55,7 @@ if __name__ == "__main__":
 				latest_utc = mainloop(r, latest_utc)
 				print ("\nlatest_utc:"+latest_utc)
 				os.environ["latest_comment_utc"] = latest_utc
-				time.sleep(5*60) # sleep 5 minutes
+				time.sleep(1*60) # sleep 1 minutes
 
 		except Exception as e:
 			print (str(e.__class__.__name__) + ": " + str(e))
