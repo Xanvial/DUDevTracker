@@ -17,7 +17,9 @@ def mainloop(reddit, latest_comment_utc):
 	TrackerReddit = reddit.subreddit("UnderlordsDevTracker")
 
 	userlist = [
-		"Xanvial"
+		"NathanKell",
+		"IceX",
+		"JonP_valve"
 		]
 
 	for u in userlist:
