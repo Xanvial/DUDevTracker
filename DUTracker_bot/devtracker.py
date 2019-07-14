@@ -18,10 +18,10 @@ userlist = [
 	"JonP_valve"
 	]
 
-def mainloop(ULreddit, TrackerReddit, latest_comment_utc):
+def mainloop(source, target, latest_comment_utc):
 	TimeLastCheckComment=float(latest_comment_utc)
 	tmpTime = 0
-	for comment in ULreddit.comments(limit=1000):
+	for comment in source.comments(limit=1000):
 		if (tmpTime == 0):
 			tmpTime = comment.created_utc   # save the latest comment time
 		if(comment.created_utc > TimeLastCheckComment and comment.author.name in userlist):
@@ -31,7 +31,7 @@ def mainloop(ULreddit, TrackerReddit, latest_comment_utc):
 			print(comment.body)
 			print(comment.permalink)
 			print(comment.created_utc)
-			TrackerReddit.submit(comment.submission.title+" ["+comment.author.name+"]", url="https://www.reddit.com"+comment.permalink)
+			target.submit(comment.submission.title+" ["+comment.author.name+"]", url="https://www.reddit.com"+comment.permalink)
 
 	return str(tmpTime)
 
@@ -53,8 +53,8 @@ if __name__ == "__main__":
 			r = bot_login()
 			print ("start utc:"+latest_utc)
 			
-			ULreddit = reddit.subreddit("underlords")
-			TrackerReddit = reddit.subreddit("UnderlordsDevTracker")
+			ULreddit = r.subreddit("underlords")
+			TrackerReddit = r.subreddit("UnderlordsDevTracker")
 			while True:
 				# Fetching all new comments that were created after latest_utc time
 				print ("\nstart utc from db:"+latest_utc)
