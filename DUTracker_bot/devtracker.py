@@ -44,16 +44,27 @@ def mainloop(reddit, latest_comment_utc):
 if __name__ == "__main__":
 	while True:
 		try:
+			DATABASE_URL = os.environ['DATABASE_URL']
+			conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+			cur = conn.cursor()
+			cur.execute("SELECT latest_utc from data")
+			latest_utc = cur.fetchall()
+
+			if (len(latest_utc) > 0):
+				latest_utc = str(latest_utc[0][0])
+			else:
+				latest_utc = "0"
+				
 			print ("\nFetching comments..")
 			r = bot_login()
-			latest_utc = os.environ["latest_comment_utc"]
 			print ("start utc:"+latest_utc)
 			while True:
-				# Fetching all new comments that were created after created_utc time
-				print ("\nstart utc from env:"+os.environ["latest_comment_utc"])
+				# Fetching all new comments that were created after latest_utc time
+				print ("\nstart utc from db:"+latest_utc)
 				latest_utc = mainloop(r, latest_utc)
 				print ("\nlatest_utc:"+latest_utc)
-				os.environ["latest_comment_utc"] = latest_utc
+				cur.execute("UPDATE data SET latest_utc = {}". format(latest_utc))
+				conn.commit()
 				time.sleep(1*60) # sleep 1 minutes
 
 		except Exception as e:
