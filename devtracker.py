@@ -1,8 +1,13 @@
 import praw
 import time
+import os
 
 # Create the Reddit instance and log in
-reddit = praw.Reddit('bot1')
+reddit = praw.Reddit(username = os.environ["reddit_username"],
+                     password = os.environ["reddit_password"],
+                     client_id = os.environ["client_id"],
+                     client_secret = os.environ["client_secret"],
+                     user_agent = "Xanvial")
 
 ULreddit = reddit.subreddit("underlords")
 TrackerReddit = reddit.subreddit("UnderlordsDevTracker")
