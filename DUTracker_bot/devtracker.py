@@ -12,7 +12,7 @@ def bot_login():
 						 user_agent = "Xanvial")
 	return reddit
 
-def mainloop(reddit, TimeLastCheckComment):
+def mainloop(reddit, latest_comment_utc):
 	ULreddit = reddit.subreddit("underlords")
 	TrackerReddit = reddit.subreddit("UnderlordsDevTracker")
 
@@ -25,6 +25,7 @@ def mainloop(reddit, TimeLastCheckComment):
 
 	print("vian test")
 	#print(reddit.user.me())
+	TimeLastCheckComment=float(latest_comment_utc)
 	tmpTime = 0
 	for comment in ULreddit.comments(limit=1000):
 		if (tmpTime == 0):
@@ -39,17 +40,18 @@ def mainloop(reddit, TimeLastCheckComment):
 
 	print(tmpTime)
 	print("vian test done")
-	return tmpTime
+	return str(tmpTime)
 
 if __name__ == "__main__":
 	while True:
 		try:
 			print ("\nFetching comments..")
 			r = bot_login()
-			created_utc = 0
+			latest_utc = os.environ["latest_comment_utc"]
 			while True:
 				# Fetching all new comments that were created after created_utc time
-				created_utc = mainloop(r, created_utc)
+				latest_utc = mainloop(r, latest_utc)
+				os.environ["latest_comment_utc"] = latest_utc
 				time.sleep(5*60) # sleep 5 minutes
 
 		except Exception as e:
