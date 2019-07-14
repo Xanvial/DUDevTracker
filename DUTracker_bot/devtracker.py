@@ -48,8 +48,10 @@ if __name__ == "__main__":
 			print ("\nFetching comments..")
 			r = bot_login()
 			latest_utc = os.environ["latest_comment_utc"]
+			print ("start utc:"+latest_utc)
 			while True:
 				# Fetching all new comments that were created after created_utc time
+				print ("\nstart utc from env:"+os.environ["latest_comment_utc"])
 				latest_utc = mainloop(r, latest_utc)
 				print ("\nlatest_utc:"+latest_utc)
 				os.environ["latest_comment_utc"] = latest_utc
