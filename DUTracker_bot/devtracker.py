@@ -2,7 +2,7 @@ import praw
 import os
 import psycopg2
 import time
-import usernames from userlist
+from userlist import usernames
 
 def bot_login():
 	# Create the Reddit instance and log in
