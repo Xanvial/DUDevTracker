@@ -1,6 +1,7 @@
 import praw
 import os
-import psycopg2
+import psycopg2 
+import time
 
 def bot_login():
 	# Create the Reddit instance and log in
