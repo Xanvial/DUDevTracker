@@ -19,7 +19,7 @@ def mainloop(source, target, latest_comment_utc):
 	for comment in source.comments(limit=1000):
 		if (tmpTime == 0):
 			tmpTime = comment.created_utc   # save the latest comment time
-		if(comment.created_utc > TimeLastCheckComment and comment.author.name in userlist.usernames):
+		if(comment.created_utc > TimeLastCheckComment and comment.author.name in usernames):
 			print("-- Found --")
 			print(comment.submission.title)
 			print(comment.comment.author.name)
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 				latest_utc = "0"
 			 
 			print("Dev List:")
-			for u in userlist.usernames:
+			for u in usernames:
 				print("  "+u)
 				
 			print ("\nFetching comments..")
