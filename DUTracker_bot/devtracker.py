@@ -42,11 +42,7 @@ if __name__ == "__main__":
 				latest_utc = str(latest_utc[0][0])
 			else:
 				latest_utc = "0"
-			 
-			print("Dev List:")
-			for u in usernames:
-				print("  "+u)
-				
+			
 			print ("\nFetching comments..")
 			r = bot_login()
 			print ("start utc:"+latest_utc)
