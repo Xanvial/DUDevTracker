@@ -22,7 +22,7 @@ def mainloop(source, target, latest_comment_utc):
 		if(comment.created_utc > TimeLastCheckComment and comment.author.name in usernames):
 			print("-- Found --")
 			print(comment.submission.title)
-			print(comment.comment.author.name)
+			print(comment.author.name)
 			print(comment.body)
 			print(comment.permalink)
 			print(comment.created_utc)
