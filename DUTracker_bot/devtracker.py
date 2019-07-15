@@ -2,7 +2,6 @@ import praw
 import os
 import psycopg2
 import time
-from userlist import usernames
 
 def bot_login():
 	# Create the Reddit instance and log in
@@ -19,7 +18,7 @@ def mainloop(source, target, latest_comment_utc):
 	for comment in source.comments(limit=1000):
 		if (tmpTime == 0):
 			tmpTime = comment.created_utc   # save the latest comment time
-		if(comment.created_utc > TimeLastCheckComment and comment.author.name in usernames):
+		if(comment.created_utc > TimeLastCheckComment and comment.author_flair_css_class == 'org valve'):
 			print("-- Found --")
 			print(comment.submission.title)
 			print(comment.author.name)
