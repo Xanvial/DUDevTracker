@@ -66,4 +66,6 @@ if __name__ == "__main__":
 
 		except Exception as e:
 			print (str(e.__class__.__name__) + ": " + str(e))
-			time.sleep(15)
+			cur.close()
+			conn.close()
+			time.sleep(1*60)
