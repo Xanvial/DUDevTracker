@@ -57,7 +57,7 @@ if __name__ == "__main__":
 				print ("\nlatest_utc:"+latest_utc)
 				cur.execute("UPDATE data SET latest_utc = {}". format(latest_utc))
 				conn.commit()
-				time.sleep(3*60) # sleep 3 minutes
+				time.sleep(5*60) # sleep 5 minutes
 
 		except Exception as e:
 			print (str(e.__class__.__name__) + ": " + str(e))
