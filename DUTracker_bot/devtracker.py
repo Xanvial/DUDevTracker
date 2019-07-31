@@ -52,9 +52,9 @@ if __name__ == "__main__":
 			
 			while True:
 				# Fetching all new comments that were created after latest_utc time
-				print ("\nstart utc from db:"+latest_utc)
+				# print ("\nstart utc from db:"+latest_utc)
 				latest_utc = mainloop(ULreddit, TrackerReddit, latest_utc)
-				print ("\nlatest_utc:"+latest_utc)
+				# print ("\nlatest_utc:"+latest_utc)
 				cur.execute("UPDATE data SET latest_utc = {}". format(latest_utc))
 				conn.commit()
 				time.sleep(5*60) # sleep 5 minutes
